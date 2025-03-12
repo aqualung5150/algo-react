@@ -24,7 +24,7 @@ const SignUp = () => {
       <ConfirmPasswordField input={confirmPassword} validations={validations} />
       <NicknameField input={nickname} validations={validations} />
       <button
-        className="mb-2 h-14 w-[120px] rounded-md bg-blue-500 text-base text-white"
+        className="mb-2 h-14 w-[120px] cursor-pointer rounded-xs border border-blue-500 text-base text-blue-500"
         type="submit"
       >
         등록

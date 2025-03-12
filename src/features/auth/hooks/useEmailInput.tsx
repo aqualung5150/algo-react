@@ -9,7 +9,7 @@ const useEmailInput = (
 
   const emailCheck = useCallback(async (email: string) => {
     const res = await axios.post(
-      `http://localhost:8080/auth/signup/available`,
+      `${import.meta.env.VITE_API_URL}/auth/signup/available`,
       { email: email },
     );
     const emailUnique = res.data.success ? 1 : -1;

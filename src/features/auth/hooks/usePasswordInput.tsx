@@ -11,6 +11,7 @@ const usePasswordInput = (
     let pwdCharSet = 0;
     let pwdLength = 0;
     let pwdSeriesOfSameChar = 0;
+    //TODO: 스프링이랑 regex 맞춰야함
     if (input.length !== 0) {
       pwdCharSet = input.match(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{0,}$/,

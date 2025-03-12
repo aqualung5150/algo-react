@@ -45,7 +45,7 @@ const useSignUp = () => {
 
       if (isValid) {
         try {
-          await axios.post("http://localhost:8080/auth/signup", {
+          await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, {
             email: email.value,
             password: password.value,
             nickname: nickname.value,

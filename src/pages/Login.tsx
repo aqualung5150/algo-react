@@ -19,10 +19,13 @@ const Login = () => {
     if (email.value.length <= 0 || password.value.length <= 0) return;
 
     try {
-      const res = await axios.post("http://localhost:8080/auth/login", {
-        email: email.value,
-        password: password.value,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/login`,
+        {
+          email: email.value,
+          password: password.value,
+        },
+      );
 
       console.log(res.data.username);
     } catch (err: any) {
@@ -41,30 +44,34 @@ const Login = () => {
           <div className="flex flex-col gap-2">
             <input
               // type="email // -> 'admin'으로 로그인하려 하면 브라우저에서 계속 email형식 검사함.
-              className={`h-12 w-56 rounded border p-2 outline-none ${error && "border-red-500"}`}
+              className={`h-12 w-56 rounded-xs border p-2 outline-none ${error && "border-red-500"}`}
               {...email}
               placeholder="Email"
             />
             <input
               type="password"
-              className={`h-12 w-56 rounded border p-2 outline-none ${error && "border-red-500"}`}
+              className={`h-12 w-56 rounded-xs border p-2 outline-none ${error && "border-red-500"}`}
               {...password}
               placeholder="Password"
             />
           </div>
           <button
             type="submit"
-            className="h-full w-20 rounded bg-blue-500 text-white"
+            className="h-full w-20 cursor-pointer rounded-xs border border-blue-500 text-blue-500"
           >
             로그인
           </button>
         </div>
         {error && <span className="text-sm text-red-500">{error}</span>}
         <div className="flex gap-5">
-          <a href="http://localhost:8080/oauth2/authorization/google">
+          <a
+            href={`${import.meta.env.VITE_API_URL}/oauth2/authorization/google`}
+          >
             <GoogleSVG className="h-14 w-14" />
           </a>
-          <a href="http://localhost:8080/oauth2/authorization/naver">
+          <a
+            href={`${import.meta.env.VITE_API_URL}/oauth2/authorization/naver`}
+          >
             <img src={NaverLogin} className="h-14 w-14" />
           </a>
         </div>
