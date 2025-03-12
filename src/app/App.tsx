@@ -6,16 +6,6 @@ import Home from "../pages/Home";
 import Layout from "../layout/Layout";
 
 function App() {
-  // return (
-  //   <>
-  //     <div>
-  //       <a href="http://localhost:8080/oauth2/authorization/google?mycookie=yourcookie" target="_blank">
-  //         Google로그인
-  //       </a>
-  //     </div>
-  //   </>
-  // )
-
   //TEST - cors 허용
   axios.defaults.withCredentials = true;
 

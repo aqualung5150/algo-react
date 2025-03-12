@@ -1,4 +1,5 @@
 import React from "react";
+import GithubSVG from "assets/github-mark.svg?react";
 
 const Footer = () => {
   return (
@@ -9,8 +10,7 @@ const Footer = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        {/* <GithubIcon className="h-11 w-11" /> */}
-        <p className="rounded-2xl bg-amber-900"></p>
+        <GithubSVG className="h-11 w-11" />
       </a>
       <div className="flex flex-col justify-center italic">
         <span className="font-semibold">최승준</span>

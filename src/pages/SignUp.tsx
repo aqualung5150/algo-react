@@ -1,63 +1,36 @@
-import axios from "axios";
-import { useState } from "react";
+import EmailField from "features/auth/components/EmailField";
+import PasswordField from "features/auth/components/PasswordField";
+import ConfirmPasswordField from "features/auth/components/ConfirmPasswordField";
+import NicknameField from "features/auth/components/NicknameField";
+import useSignUp from "features/auth/hooks/useSignUp";
 
-const Signup = () => {
-    const [emailValue, setEmailValue] = useState("");
-    const [passwordValue, setPasswordValue] = useState("");
-    const [usernameValue, setUsernameValue] = useState("");
-    const [error, setError] = useState("");
+const SignUp = () => {
+  const {
+    email,
+    password,
+    confirmPassword,
+    nickname,
+    validations,
+    handleSubmit,
+  } = useSignUp();
 
-    const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmailValue(e.target.value);
-    };
-
-    const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPasswordValue(e.target.value);
-    };
-
-    const onUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUsernameValue(e.target.value);
-    };
-
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if (emailValue.length <= 0 || passwordValue.length <= 0) return;
-
-        try {
-            const res = await axios.post("http://localhost:8080/auth/signup", {
-                email: emailValue,
-                password: passwordValue,
-                username: usernameValue,
-            });
-
-            console.log(res.data.username);
-        } catch (err: any) {
-            setError("일치하는 계정이 없습니다.");
-        }
-    };
-
-    return (
-        <form onSubmit={onSubmit}>
-            <input
-                onChange={onEmailChange}
-                value={emailValue}
-                placeholder="Email"
-            />
-            <input
-                onChange={onPasswordChange}
-                value={passwordValue}
-                placeholder="Password"
-            />
-            <input
-                onChange={onUsernameChange}
-                value={usernameValue}
-                placeholder="Username"
-            />
-            <button type="submit">!로그인!</button>
-            {error && <span>{error}</span>}
-        </form>
-    );
+  return (
+    <form
+      className="flex h-full w-full flex-col items-center gap-10 bg-white p-10"
+      onSubmit={handleSubmit}
+    >
+      <EmailField input={email} validations={validations} />
+      <PasswordField input={password} validations={validations} />
+      <ConfirmPasswordField input={confirmPassword} validations={validations} />
+      <NicknameField input={nickname} validations={validations} />
+      <button
+        className="mb-2 h-14 w-[120px] rounded-md bg-blue-500 text-base text-white"
+        type="submit"
+      >
+        등록
+      </button>
+    </form>
+  );
 };
 
-export default Signup;
+export default SignUp;
