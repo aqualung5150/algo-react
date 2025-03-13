@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-const useNicknameInput = (
+const useUsernameInput = (
   setValidations: React.Dispatch<React.SetStateAction<SignUpValidation>>,
 ) => {
   const [value, setValue] = useState("");
@@ -10,10 +10,10 @@ const useNicknameInput = (
     const isValid = input.length > 12 || input.length < 2 ? -1 : 1;
 
     setValue(input);
-    setValidations((prev) => ({ ...prev, nickname: isValid }));
+    setValidations((prev) => ({ ...prev, username: isValid }));
   }, []);
 
   return { value, onChange };
 };
 
-export default useNicknameInput;
+export default useUsernameInput;

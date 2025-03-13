@@ -1,7 +1,7 @@
 import EmailField from "features/auth/components/EmailField";
 import PasswordField from "features/auth/components/PasswordField";
 import ConfirmPasswordField from "features/auth/components/ConfirmPasswordField";
-import NicknameField from "features/auth/components/NicknameField";
+import UsernameField from "features/auth/components/UsernameField";
 import useSignUp from "features/auth/hooks/useSignUp";
 
 const SignUp = () => {
@@ -9,7 +9,7 @@ const SignUp = () => {
     email,
     password,
     confirmPassword,
-    nickname,
+    username,
     validations,
     handleSubmit,
   } = useSignUp();
@@ -22,7 +22,7 @@ const SignUp = () => {
       <EmailField input={email} validations={validations} />
       <PasswordField input={password} validations={validations} />
       <ConfirmPasswordField input={confirmPassword} validations={validations} />
-      <NicknameField input={nickname} validations={validations} />
+      <UsernameField input={username} validations={validations} />
       <button
         className="mb-2 h-14 w-[120px] cursor-pointer rounded-xs border border-blue-500 text-base text-blue-500"
         type="submit"

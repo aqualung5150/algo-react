@@ -4,12 +4,12 @@ import axios from "axios";
 import useEmailInput from "./useEmailInput";
 import usePasswordInput from "./usePasswordInput";
 import useConfirmPasswordInput from "./useConfirmPasswordInput";
-import useNicknameInput from "./useNicknameInput";
+import useUsernameInput from "./useUsernameInput";
 
 const useSignUp = () => {
   const navigate = useNavigate();
   const [validations, setValidations] = useState<SignUpValidation>({
-    nickname: 0,
+    username: 0,
     emailForm: 0,
     emailUnique: 0,
     pwdCharSet: 0,
@@ -23,11 +23,12 @@ const useSignUp = () => {
     password.value,
     setValidations,
   );
-  const nickname = useNicknameInput(setValidations);
+  const username = useUsernameInput(setValidations);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      console.log("submit!");
 
       const newValidations = { ...validations };
 
@@ -48,7 +49,7 @@ const useSignUp = () => {
           await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, {
             email: email.value,
             password: password.value,
-            nickname: nickname.value,
+            username: username.value,
           });
           alert("회원가입에 성공했습니다.");
           navigate("/");
@@ -66,7 +67,7 @@ const useSignUp = () => {
     email,
     password,
     confirmPassword,
-    nickname,
+    username,
     validations,
     handleSubmit,
   };

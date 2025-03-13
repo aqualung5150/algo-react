@@ -16,7 +16,12 @@ const NavMobile = () => {
     >
       <div onClick={() => dispatch(setToggle(false))}>
         <ul className="flex flex-col gap-2">
-          <Link to={"login"}>로그인</Link>
+          <li>
+            <Link to={"recruit-posts"}>스터디 모집</Link>
+          </li>
+          <li className="text-blue-500">
+            <Link to={"login"}>로그인</Link>
+          </li>
         </ul>
       </div>
     </div>

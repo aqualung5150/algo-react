@@ -4,7 +4,7 @@ interface SignUpFieldProps {
 }
 
 interface SignUpValidation {
-  nickname: number;
+  username: number;
   emailForm: number;
   emailUnique: number;
   pwdCharSet: number;
