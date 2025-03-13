@@ -1,9 +1,10 @@
 import PostPagination from "features/recruitpost/components/PostPagination";
+import RecruitPostItem from "features/recruitpost/components/RecruitPostItem";
 import useAxios from "hooks/useAxios";
 import { useSearchParams } from "react-router";
 import { RecruitPostPageResponse } from "types/recruitpost";
 
-const RecruitPosts = () => {
+const RecruitPostBoard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const reqParams = new URLSearchParams();
@@ -20,13 +21,10 @@ const RecruitPosts = () => {
     <div className="flex h-full w-full flex-col items-center gap-5 p-5 2xl:w-2/3">
       {data && (
         <>
-          <div className="h-full w-full">
+          <div className="flex h-full w-full flex-col items-center gap-2">
             {data.posts.map((post) => {
               return (
-                <div key={post.id}>
-                  <p>{post.id}</p>
-                  <p>{post.title}</p>
-                </div>
+                <RecruitPostItem key={post.id} post={post} />
               );
             })}
           </div>
@@ -50,4 +48,4 @@ const RecruitPosts = () => {
   );
 };
 
-export default RecruitPosts;
+export default RecruitPostBoard;

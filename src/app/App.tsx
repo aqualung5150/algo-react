@@ -4,7 +4,8 @@ import Signup from "../pages/SignUp";
 import axios from "axios";
 import Home from "../pages/Home";
 import Layout from "../layout/Layout";
-import RecruitPosts from "pages/RecruitPosts";
+import RecruitPostBoard from "pages/RecruitPostBoard";
+import RecruitPost from "pages/RecruitPost";
 
 function App() {
   //TEST - cors 허용
@@ -17,7 +18,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="recruit-posts" element={<RecruitPosts />} />
+          <Route path="recruit-posts">
+            <Route path="" element={<RecruitPostBoard />} />
+            <Route path=":id" element={<RecruitPost />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

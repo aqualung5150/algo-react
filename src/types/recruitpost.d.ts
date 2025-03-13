@@ -11,13 +11,6 @@ interface PaginationProps {
   setSearchParams: SetURLSearchParams;
 }
 
-interface ProfileResponse {
-  id: number;
-  email: string;
-  username: string;
-  imageUrl: string;
-}
-
 interface StudyRuleResponse {
   numberOfMembers: number;
   minLevel: number;
@@ -40,4 +33,9 @@ interface RecruitPostResponse {
 interface RecruitPostPageResponse {
   totalCount: number;
   posts: RecruitPostResponse[];
+}
+
+interface ApplicantSliceResponse {
+  hasNext: boolean;
+  applicantList: ProfileResponse[];
 }

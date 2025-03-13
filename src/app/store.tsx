@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 import menuSlice from "../layout/menuSlice";
+import memberSlice from "features/member/memberSlice";
 
 // redux-persist
 
@@ -10,12 +11,13 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: ["user"],
+  whitelist: ["member"],
 };
 
 const rootReducer = persistReducer(
   persistConfig,
   combineReducers({
+    member: memberSlice.reducer,
     menu: menuSlice.reducer,
   }),
 );

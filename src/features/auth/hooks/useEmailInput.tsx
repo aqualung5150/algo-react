@@ -8,12 +8,15 @@ const useEmailInput = (
   const [value, setValue] = useState("");
 
   const emailCheck = useCallback(async (email: string) => {
-    const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/auth/signup/available`,
-      { email: email },
-    );
-    const emailUnique = res.data.success ? 1 : -1;
-    setValidations((prev) => ({ ...prev, emailUnique: emailUnique }));
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/signup/available`,
+        { email: email },
+      );
+      setValidations((prev) => ({ ...prev, emailUnique: 1 }));
+    } catch (err: any) {
+      setValidations((prev) => ({ ...prev, emailUnique: -1 }));
+    }
   }, []);
 
   const debounceEmailCheck = useCallback(debounce(emailCheck, 300), []);

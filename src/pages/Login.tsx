@@ -2,11 +2,14 @@ import axios from "axios";
 import React, { useState } from "react";
 import GoogleSVG from "assets/google-login.svg?react";
 import NaverLogin from "assets/naver-login.png";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useFormInput from "hooks/useFormInput";
 import { useDispatch } from "react-redux";
+import { axiosInstance } from "data/axiosInstance";
+import { setUser } from "features/member/memberSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { inputProps: email } = useFormInput("");
   const { inputProps: password } = useFormInput("");
@@ -19,15 +22,18 @@ const Login = () => {
     if (email.value.length <= 0 || password.value.length <= 0) return;
 
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/login`,
-        {
-          email: email.value,
-          password: password.value,
-        },
-      );
+      const loginResponse = await axiosInstance.post("login", {
+        email: email.value,
+        password: password.value,
+      });
 
-      console.log(res.data.username);
+      // console.log(loginResponse.data);
+
+      const profileResponse = await axiosInstance.get("members/me");
+      // console.log(profileResponse.data);
+      dispatch(setUser(profileResponse.data));
+      setError("");
+      navigate(`/${loginResponse.data.redirectUrl}`);
     } catch (err: any) {
       setError("일치하는 계정이 없습니다.");
     }

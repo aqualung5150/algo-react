@@ -28,7 +28,6 @@ const useSignUp = () => {
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log("submit!");
 
       const newValidations = { ...validations };
 

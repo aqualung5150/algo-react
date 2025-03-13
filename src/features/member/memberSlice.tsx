@@ -4,23 +4,19 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   id: null,
   email: "",
-  nickname: "",
-  image: "",
-  iat: null,
-  exp: null,
+  username: "",
+  imageUrl: "",
 };
 
 const memberSlice = createSlice({
-  name: "user",
+  name: "member",
   initialState,
   reducers: {
     setUser: (state, action) => {
       state.id = action.payload.id;
       state.email = action.payload.email;
-      state.nickname = action.payload.nickname;
-      state.image = action.payload.image;
-      state.iat = action.payload.iat;
-      state.exp = action.payload.exp;
+      state.username = action.payload.username;
+      state.imageUrl = action.payload.imageUrl;
     },
 
     resetUser: () => initialState,
