@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import axios from "axios";
+import { axiosInstance } from "data/axiosInstance";
 
 const initialState = {
   id: null,
@@ -27,17 +27,15 @@ const memberSlice = createSlice({
       });
     },
 
-    // logout: (state, action) => {
-    //   const url = `${process.env.REACT_APP_BASE_URL}/api/auth/logout`;
-    //   axios.post(url, {}).catch(() => {});
+    logout: (state, action) => {
+      axiosInstance.post("/logout").catch(() => {});
 
-    //   window.location.href = action.payload;
-    //   return initialState;
-    // },
+      window.location.href = action.payload;
+      return initialState;
+    },
   },
 });
 
 export default memberSlice;
 
-export const { setUser, resetUser, updateUser } = memberSlice.actions;
-// export const { setUser, resetUser, updateUser, logout } = memberSlice.actions;
+export const { setUser, resetUser, updateUser, logout } = memberSlice.actions;
