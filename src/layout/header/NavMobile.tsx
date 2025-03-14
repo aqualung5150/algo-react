@@ -6,6 +6,7 @@ import { setToggle } from "layout/menuSlice";
 
 const NavMobile = () => {
   const dispatch = useDispatch();
+  const memberId = useSelector((state: RootState) => state.member.id);
   const toggle = useSelector((state: RootState) => state.menu.toggle);
 
   return (
@@ -19,9 +20,15 @@ const NavMobile = () => {
           <li>
             <Link to={"recruit-posts"}>스터디 모집</Link>
           </li>
-          <li className="text-blue-500">
-            <Link to={"login"}>로그인</Link>
-          </li>
+          {memberId ? (
+            <li className="text-blue-500">
+              <Link to="mypage">마이페이지</Link>
+            </li>
+          ) : (
+            <li className="text-blue-500">
+              <Link to="login">로그인</Link>
+            </li>
+          )}
         </ul>
       </div>
     </div>
