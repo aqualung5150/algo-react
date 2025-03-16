@@ -4,11 +4,14 @@ import { SetURLSearchParams } from "react-router";
 //   delete(name: string, value?: any): boolean;
 // }
 
-interface PaginationProps {
-  totalCount: number;
-  interval: number;
+interface SearchParamsProps {
   searchParams: URLSearchParams;
   setSearchParams: SetURLSearchParams;
+}
+
+interface PaginationProps extends SearchParamsProps {
+  totalCount: number;
+  interval: number;
 }
 
 interface StudyRuleResponse {

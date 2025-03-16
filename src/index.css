@@ -12,6 +12,22 @@
   }
 }
 
+@layer components {
+  /* filter-table */
+  .filter-table {
+    @apply border-y-2 border-black;
+  }
+  .filter-table tr td {
+    @apply p-6;
+  }
+  .filter-table td {
+    @apply border-t;
+  }
+  .filter-table td:first-child {
+    @apply w-44 bg-gray-100;
+  }
+}
+
 /* :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;

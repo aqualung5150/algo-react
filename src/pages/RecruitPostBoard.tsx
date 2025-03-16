@@ -1,13 +1,18 @@
+import RecruitPostFilterDesktop from "features/recruitpost/components/filter/RecruitPostFilterDesktop";
+import RecruitPostFilterMobile from "features/recruitpost/components/filter/RecruitPostFilterMobile";
 import PostPagination from "features/recruitpost/components/PostPagination";
 import RecruitPostItem from "features/recruitpost/components/RecruitPostItem";
 import useAxios from "hooks/useAxios";
-import { useSearchParams } from "react-router";
+import { useParams, useSearchParams } from "react-router";
 import { RecruitPostPageResponse } from "types/recruitpost";
 
 const RecruitPostBoard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const reqParams = new URLSearchParams();
+  // searching keyword
+  const keyword = useParams().keyword;
+  if (keyword) reqParams.append("keyword", keyword);
   searchParams.forEach((value, key) => {
     if (key === "page") {
       value = (parseInt(value) - 1).toString();
@@ -19,13 +24,13 @@ const RecruitPostBoard = () => {
 
   return (
     <div className="flex h-full w-full flex-col items-center gap-5 p-5 2xl:w-2/3">
+      <RecruitPostFilterDesktop {...{ searchParams, setSearchParams }} />
+      <RecruitPostFilterMobile {...{ searchParams, setSearchParams }} />
       {data && (
         <>
           <div className="flex h-full w-full flex-col items-center gap-2">
             {data.posts.map((post) => {
-              return (
-                <RecruitPostItem key={post.id} post={post} />
-              );
+              return <RecruitPostItem key={post.id} post={post} />;
             })}
           </div>
           <div className="w-full lg:hidden">
