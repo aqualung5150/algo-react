@@ -3,6 +3,14 @@ import { SearchParamsProps } from "types/recruitpost";
 import FilterButton from "./FilterButton";
 
 const TagFilter = ({ searchParams, setSearchParams }: SearchParamsProps) => {
+  const tagProps = [
+    ["DP", "1"],
+    ["DFS", "2"],
+    ["BFS", "3"],
+    ["Implementation", "4"],
+    ["Data Structures", "5"],
+  ];
+
   const tag = searchParams.get("tag");
   const tags = tag ? tag.split(",") : [];
 
@@ -22,20 +30,13 @@ const TagFilter = ({ searchParams, setSearchParams }: SearchParamsProps) => {
     setSearchParams(searchParams);
   };
 
-  const tagProps = [
-    ["DP", "dp"],
-    ["DFS", "dfs"],
-    ["BFS", "bfs"],
-    ["Implementation", "implementation"],
-    ["Data Structures", "data_structures"],
-  ];
-
   return (
     <ul className="flex flex-wrap gap-2 text-sm lg:flex-row">
-      {tagProps.map(([d, p]) => (
+      {tagProps.map(([name, param]) => (
         <FilterButton
-          displayName={d}
-          paramValue={p}
+          key={param}
+          displayName={name}
+          paramValue={param}
           isSelected={isSelected}
           setSelected={setTag}
         />

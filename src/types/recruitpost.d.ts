@@ -16,12 +16,13 @@ interface PaginationProps extends SearchParamsProps {
 
 interface StudyRuleResponse {
   numberOfMembers: number;
-  minLevel: number;
-  maxLevel: number;
+  // minLevel: number;
+  // maxLevel: number;
+  level: number;
   totalWeek: number;
   submitDayOfWeek: string;
   submitPerWeek: number;
-  tags: string[];
+  tags: number[];
 }
 
 interface RecruitPostResponse {

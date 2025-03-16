@@ -16,7 +16,7 @@ const RecruitPostFilterMobile = ({
   return (
     <div className="w-full lg:hidden">
       <div className="flex gap-2 pb-2 pl-2">
-        <h1>검색결과</h1>
+        <h1>검색옵션</h1>
       </div>
       <div className="flex w-full flex-col border-y-2 border-black">
         <ul>

@@ -1,5 +1,5 @@
 import { axiosInstance } from "data/axiosInstance";
-import { updateUser } from "features/member/memberSlice";
+import { setUser, updateUser } from "features/member/memberSlice";
 import useFormInput from "hooks/useFormInput";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -21,7 +21,7 @@ const SetUsername = () => {
         username: username.value,
       });
 
-      dispatch(updateUser({ username: username.value }));
+      dispatch(setUser(res.data.profile));
       setError("");
       navigate(`/${res.data.redirectUrl}`);
     } catch (err: any) {
