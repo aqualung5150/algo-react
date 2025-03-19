@@ -17,7 +17,7 @@ const NavDesktop = () => {
       {memberId ? (
         <Link
           className="flex h-10 w-[100px] flex-col items-center justify-center rounded-xs border border-blue-500 text-base text-blue-500"
-          to="mypage"
+          to={`/members/${memberId}`}
         >
           마이페이지
         </Link>

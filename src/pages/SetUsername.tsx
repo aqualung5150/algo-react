@@ -1,5 +1,5 @@
 import { axiosInstance } from "data/axiosInstance";
-import { setUser, updateUser } from "features/member/memberSlice";
+import { setUser } from "features/member/memberSlice";
 import useFormInput from "hooks/useFormInput";
 import { useState } from "react";
 import { useDispatch } from "react-redux";

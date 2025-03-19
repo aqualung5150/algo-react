@@ -22,7 +22,7 @@ const NavMobile = () => {
           </li>
           {memberId ? (
             <li className="text-blue-500">
-              <Link to="mypage">마이페이지</Link>
+              <Link to={`/members/${memberId}`}>마이페이지</Link>
             </li>
           ) : (
             <li className="text-blue-500">

@@ -12,7 +12,9 @@ import { axiosInstance } from "data/axiosInstance";
 import { useDispatch } from "react-redux";
 import { resetUser, setUser } from "features/member/memberSlice";
 import useAxiosInterceptor from "features/auth/hooks/useAxiosInterceptor";
-import MyPage from "pages/MyPage";
+import Members from "pages/Members";
+import Profile from "features/member/components/Profile";
+import EditProfile from "features/member/components/EditProfile";
 
 function App() {
   //TEST - cors 허용
@@ -40,7 +42,10 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
-          <Route path="mypage" element={<MyPage />} />
+          <Route path="members/:id" element={<Members />}>
+            <Route path="" element={<Profile />} />
+            <Route path="edit" element={<EditProfile />} />
+          </Route>
           <Route path="set-username" element={<SetUsername />} />
           <Route path="signup" element={<Signup />} />
           <Route path="recruit-posts">
