@@ -15,6 +15,7 @@ import useAxiosInterceptor from "features/auth/hooks/useAxiosInterceptor";
 import Members from "pages/Members";
 import Profile from "features/member/components/Profile";
 import EditProfile from "features/member/components/EditProfile";
+import RecruitPostForm from "pages/RecruitPostForm";
 
 function App() {
   //TEST - cors 허용
@@ -51,6 +52,7 @@ function App() {
           <Route path="recruit-posts">
             <Route path="" element={<RecruitPostBoard />} />
             <Route path=":id" element={<RecruitPost />} />
+            <Route path="new" element={<RecruitPostForm />} />
           </Route>
         </Route>
       </Routes>

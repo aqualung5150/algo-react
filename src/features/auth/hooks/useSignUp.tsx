@@ -50,7 +50,7 @@ const useSignUp = () => {
             password: password.value,
             username: username.value,
           });
-          alert("회원가입에 성공했습니다.");
+          alert("회원가입에 성공했습니다.\n로그인해 주세요.");
           navigate("/");
         } catch (err) {
           alert("회원가입에 실패했습니다.");

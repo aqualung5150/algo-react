@@ -3,7 +3,7 @@ import RecruitPostFilterMobile from "features/recruitpost/components/filter/Recr
 import PostPagination from "features/recruitpost/components/PostPagination";
 import RecruitPostItem from "features/recruitpost/components/RecruitPostItem";
 import useAxios from "hooks/useAxios";
-import { useParams, useSearchParams } from "react-router";
+import { Link, useParams, useSearchParams } from "react-router";
 import { RecruitPostPageResponse } from "types/recruitpost";
 
 const RecruitPostBoard = () => {
@@ -32,6 +32,11 @@ const RecruitPostBoard = () => {
             {data.posts.map((post) => {
               return <RecruitPostItem key={post.id} post={post} />;
             })}
+          </div>
+          <div className="flex w-full flex-row-reverse">
+            <button className="button-blue px-2 py-1">
+              <Link to="new">작성하기</Link>
+            </button>
           </div>
           <div className="w-full lg:hidden">
             <PostPagination

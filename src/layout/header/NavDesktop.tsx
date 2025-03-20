@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router";
 
 const NavDesktop = () => {
-  const memberId = useSelector((state: RootState) => state.member.id);
+  const member = useSelector((state: RootState) => state.member);
 
   return (
     <div className="hidden w-full flex-row items-center bg-white lg:flex">
@@ -14,12 +14,12 @@ const NavDesktop = () => {
         </li>
         <li className="cursor-pointer hover:text-blue-500">MENU2</li>
       </ul>
-      {memberId ? (
+      {member.id ? (
         <Link
           className="flex h-10 w-[100px] flex-col items-center justify-center rounded-xs border border-blue-500 text-base text-blue-500"
-          to={`/members/${memberId}`}
+          to={`/members/${member.id}`}
         >
-          마이페이지
+          {member.username}
         </Link>
       ) : (
         <Link

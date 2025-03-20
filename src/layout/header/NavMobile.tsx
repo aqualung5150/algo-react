@@ -1,13 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { setToggle } from "layout/menuSlice";
+import AngleUpIcon from "assets/angleUp.svg?react";
+import AngleDownIcon from "assets/angleDown.svg?react";
 
 const NavMobile = () => {
   const dispatch = useDispatch();
-  const memberId = useSelector((state: RootState) => state.member.id);
+  const member = useSelector((state: RootState) => state.member);
   const toggle = useSelector((state: RootState) => state.menu.toggle);
+
+  const [openMypage, setOpenMypage] = useState(false);
+
+  useEffect(() => {
+    if (!toggle) setOpenMypage(false);
+  }, [toggle]);
 
   return (
     <div
@@ -15,15 +23,35 @@ const NavMobile = () => {
         toggle ? "top-16" : "top-[-100%]"
       }`}
     >
-      <div onClick={() => dispatch(setToggle(false))}>
+      <div>
         <ul className="flex flex-col gap-2">
-          <li>
-            <Link to={"recruit-posts"}>스터디 모집</Link>
+          <li onClick={() => dispatch(setToggle(false))}>
+            <Link to={"recruit-posts"}>스터디</Link>
           </li>
-          {memberId ? (
-            <li className="text-blue-500">
-              <Link to={`/members/${memberId}`}>마이페이지</Link>
-            </li>
+          {member.id ? (
+            <>
+              <li
+                onClick={() => setOpenMypage(!openMypage)}
+                className="flex items-center justify-between text-blue-500"
+              >
+                <span>{member.username}</span>
+                {openMypage ? (
+                  <AngleUpIcon className="h-7 w-7" />
+                ) : (
+                  <AngleDownIcon className="h-7 w-7" />
+                )}
+              </li>
+              {openMypage && (
+                <ul onClick={() => dispatch(setToggle(false))}>
+                  <li>
+                    <Link to={`/members/${member.id}`}>- 내 정보</Link>
+                  </li>
+                  <li>
+                    <Link to={`/members/${member.id}/edit`}>- 정보 수정</Link>
+                  </li>
+                </ul>
+              )}
+            </>
           ) : (
             <li className="text-blue-500">
               <Link to="login">로그인</Link>

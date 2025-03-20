@@ -26,6 +26,26 @@
   .filter-table td:first-child {
     @apply w-44 bg-gray-100;
   }
+
+  /* button */
+  .button-green {
+    @apply mb-2 rounded-xs bg-green-500 text-base font-semibold text-white;
+  }
+  .button-blue {
+    @apply mb-2 rounded-xs bg-blue-500 text-base font-semibold text-white;
+  }
+  .button-red {
+    @apply mb-2 rounded-xs bg-red-500 text-base font-semibold text-white;
+  }
+  .button-white {
+    @apply mb-2 rounded-xs border bg-white text-base font-semibold text-black;
+  }
+  .button-black {
+    @apply mb-2 rounded-xs bg-black text-base font-semibold text-white;
+  }
+  .button-gray {
+    @apply mb-2 rounded-xs bg-gray-400 text-base font-semibold text-white;
+  }
 }
 
 /* :root {

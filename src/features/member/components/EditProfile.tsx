@@ -78,7 +78,7 @@ const EditProfile = () => {
       </div>
 
       <button
-        className="button-green h-[50px] w-[100px]"
+        className="button-blue h-[50px] w-[100px]"
         type="submit"
         disabled={disabled}
       >
