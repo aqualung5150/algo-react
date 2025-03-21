@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { setToggle } from "layout/menuSlice";
 import AngleUpIcon from "assets/angleUp.svg?react";
 import AngleDownIcon from "assets/angleDown.svg?react";
+import { logout } from "features/member/memberSlice";
 
 const NavMobile = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,14 @@ const NavMobile = () => {
                   </li>
                   <li>
                     <Link to={`/members/${member.id}/edit`}>- 정보 수정</Link>
+                  </li>
+                  <li
+                    className="mt-5 text-sm text-gray-500"
+                    onClick={() =>
+                      dispatch(logout(import.meta.env.VITE_BASE_URL))
+                    }
+                  >
+                    로그아웃
                   </li>
                 </ul>
               )}

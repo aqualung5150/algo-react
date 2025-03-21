@@ -5,7 +5,7 @@ import axios, {
 } from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { logout, setUser } from "features/member/memberSlice";
+import { logout, resetUser, setUser } from "features/member/memberSlice";
 
 const useAxiosInterceptor = (instance: AxiosInstance) => {
   const dispatch = useDispatch();
@@ -21,8 +21,11 @@ const useAxiosInterceptor = (instance: AxiosInstance) => {
     if (error.response.data.code === 1002) {
       //토큰 만료
       try {
-        const res = await axios.post(
-          `${import.meta.env.VITE_API_URL}/auth/reissue`,
+        console.log("HERE");
+        await axios.post(`${import.meta.env.VITE_API_URL}/auth/reissue`);
+
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/members/me`,
         );
         dispatch(setUser(res.data));
         return error.config && axios(error.config);

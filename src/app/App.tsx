@@ -9,33 +9,22 @@ import RecruitPost from "pages/RecruitPost";
 import SetUsername from "pages/SetUsername";
 import { useEffect } from "react";
 import { axiosInstance } from "data/axiosInstance";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetUser, setUser } from "features/member/memberSlice";
 import useAxiosInterceptor from "features/auth/hooks/useAxiosInterceptor";
 import Members from "pages/Members";
 import Profile from "features/member/components/Profile";
 import EditProfile from "features/member/components/EditProfile";
 import RecruitPostForm from "pages/RecruitPostForm";
+import RecruitPostEdit from "pages/RecruitPostEdit";
+import useReconnect from "hooks/useReconnect";
 
 function App() {
   //TEST - cors 허용
   axios.defaults.withCredentials = true;
 
-  const dispatch = useDispatch();
   useAxiosInterceptor(axiosInstance);
-
-  useEffect(() => {
-    const fetchMe = async () => {
-      try {
-        const res = await axiosInstance.get("members/me");
-        dispatch(setUser(res.data));
-      } catch (err: any) {
-        dispatch(resetUser());
-      }
-    };
-
-    fetchMe();
-  }, []);
+  useReconnect();
 
   return (
     <BrowserRouter>
@@ -53,6 +42,7 @@ function App() {
             <Route path="" element={<RecruitPostBoard />} />
             <Route path=":id" element={<RecruitPost />} />
             <Route path="new" element={<RecruitPostForm />} />
+            <Route path=":id/edit" element={<RecruitPostEdit />} />
           </Route>
         </Route>
       </Routes>

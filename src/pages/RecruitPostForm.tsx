@@ -47,12 +47,9 @@ const RecruitPostForm = () => {
         content: content.value,
       });
 
-      //TODO: 응답바디에 postId 받기
-      console.log(res);
-      // console.log(res.headers);
-      // navigate(res.headers["Location"]);
+      navigate(`/recruit-posts/${res.data.id}`);
     } catch (err: any) {
-      console.log(err);
+      alert("게시글 작성에 실패했습니다.");
     }
   };
 
