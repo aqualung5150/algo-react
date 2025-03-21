@@ -1,13 +1,17 @@
 import { axiosInstance } from "data/axiosInstance";
 import TagSelector from "features/recruitpost/components/TagSelector";
+import useAxios from "hooks/useAxios";
 import useFormInput from "hooks/useFormInput";
 import useFormTextArea from "hooks/useFormTextArea";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import isEmptyOrSpaces from "utils/isStringEmpty";
 
-const RecruitPostForm = () => {
+const RecruitPostEdit = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
+
+  const { data, error, loading } = useAxios<any>(`recruit-posts/${id}`);
 
   const [disabled, setDisabled] = useState(false);
   const [submitDayOfWeek, setSubmitDayOfWeek] = useState<string>("MONDAY");
@@ -15,10 +19,24 @@ const RecruitPostForm = () => {
   const [level, setLevel] = useState<string>("1");
   const [tags, setTags] = useState<string[]>([]);
   const { inputProps: totalWeek, setValue: setTotalWeek } = useFormInput("4");
-  const { inputProps: submitPerWeek, setValue: SetsubmitPerWeek } =
+  const { inputProps: submitPerWeek, setValue: setSubmitPerWeek } =
     useFormInput("1");
   const { inputProps: title, setValue: setTitle } = useFormInput();
   const { inputProps: content, setValue: setContent } = useFormTextArea();
+
+  useEffect(() => {
+    if (!data) return;
+
+    const studyRule = data.studyRule;
+    setSubmitDayOfWeek(studyRule.submitDayOfWeek);
+    setNumberOfMembers(studyRule.numberOfMembers.toString());
+    setLevel(studyRule.level.toString());
+    setTags(studyRule.tags.map((e: number) => e.toString()));
+    setTotalWeek(studyRule.totalWeek.toString());
+    setSubmitPerWeek(studyRule.submitPerWeek.toString());
+    setTitle(data.title);
+    setContent(data.content);
+  }, [data]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,10 +51,11 @@ const RecruitPostForm = () => {
       isEmptyOrSpaces(submitPerWeek.value)
     ) {
       alert("작성하지 않은 필드가 있습니다.");
+      return;
     }
 
     try {
-      const res = await axiosInstance.post("recruit-posts", {
+      await axiosInstance.put(`recruit-posts/${id}`, {
         level: parseInt(level),
         submitDayOfWeek: submitDayOfWeek,
         numberOfMembers: parseInt(numberOfMembers),
@@ -47,7 +66,7 @@ const RecruitPostForm = () => {
         content: content.value,
       });
 
-      navigate(`/recruit-posts/${res.data.id}`);
+      navigate(`/recruit-posts/${id}`);
     } catch (err: any) {
       alert("게시글 작성에 실패했습니다.");
     }
@@ -164,4 +183,4 @@ const RecruitPostForm = () => {
   );
 };
 
-export default RecruitPostForm;
+export default RecruitPostEdit;
