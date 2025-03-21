@@ -37,14 +37,14 @@ const SubmissionForm = () => {
           className="h-6 w-6 cursor-pointer"
         />
       </div>
-      <div className="w-full rounded border bg-white p-3 shadow">
+      <div className="w-full rounded-xs border bg-white p-3 shadow">
         <input
           className="w-full p-2"
           placeholder="모집글의 제목을 입력하세요."
           {...subjectNumber}
         />
       </div>
-      <div className="w-full rounded border bg-white p-3 shadow">
+      <div className="w-full rounded-xs border bg-white p-3 shadow">
         <textarea
           className="h-32 w-full p-2"
           placeholder="모집글의 내용을 입력하세요."

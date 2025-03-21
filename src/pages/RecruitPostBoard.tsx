@@ -26,6 +26,11 @@ const RecruitPostBoard = () => {
     <div className="flex h-full w-full flex-col items-center gap-5 p-5 2xl:w-2/3">
       <RecruitPostFilterDesktop {...{ searchParams, setSearchParams }} />
       <RecruitPostFilterMobile {...{ searchParams, setSearchParams }} />
+      <div className="flex w-full flex-row-reverse">
+        <button className="button-blue h-10 w-28">
+          <Link to="new">글쓰기</Link>
+        </button>
+      </div>
       {data && (
         <>
           <div className="flex h-full w-full flex-col items-center gap-2">
@@ -33,11 +38,7 @@ const RecruitPostBoard = () => {
               return <RecruitPostItem key={post.id} post={post} />;
             })}
           </div>
-          <div className="flex w-full flex-row-reverse">
-            <button className="button-blue px-2 py-1">
-              <Link to="new">작성하기</Link>
-            </button>
-          </div>
+
           <div className="w-full lg:hidden">
             <PostPagination
               totalCount={data?.totalCount}

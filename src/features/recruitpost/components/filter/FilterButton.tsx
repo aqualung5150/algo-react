@@ -6,8 +6,8 @@ const FilterButton = ({
 }: {
   displayName: string;
   paramValue: string;
-  isSelected: (value: string) => boolean;
-  setSelected: (value: string) => void;
+  isSelected: (value: any) => boolean;
+  setSelected: (value: any) => void;
 }) => {
   return (
     <li
