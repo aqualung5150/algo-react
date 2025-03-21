@@ -43,3 +43,9 @@ interface ApplicantSliceResponse {
   hasNext: boolean;
   applicantList: ProfileResponse[];
 }
+
+interface ApplicantProps {
+  isSelected: (number) => boolean;
+  handleClick: (number) => void;
+  applicant: ProfileResponse;
+}
