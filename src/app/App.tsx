@@ -18,6 +18,7 @@ import EditProfile from "features/member/components/EditProfile";
 import RecruitPostForm from "pages/RecruitPostForm";
 import RecruitPostEdit from "pages/RecruitPostEdit";
 import useReconnect from "hooks/useReconnect";
+import Study from "pages/Study";
 
 function App() {
   //TEST - cors 허용
@@ -44,6 +45,7 @@ function App() {
             <Route path="new" element={<RecruitPostForm />} />
             <Route path=":id/edit" element={<RecruitPostEdit />} />
           </Route>
+          <Route path="study/:id" element={<Study />} />
         </Route>
       </Routes>
     </BrowserRouter>
