@@ -54,13 +54,17 @@ const RecruitPost = () => {
     setSelectedApplicants(updated);
   };
 
-  //TODO
   const createStudy = async () => {
     try {
-      const res = await axiosInstance.get("members/1");
-      console.log(res.data);
+      const requestBody: CreateStudyRequest = {
+        name: "name",
+        recruitPostId: recruitPostId ? parseInt(recruitPostId) : 0,
+        memberIds: selectedApplicants,
+      };
+      const res = await axiosInstance.post(`study`, requestBody);
+      navigate(`/study/${res.data.id}`);
     } catch (err: any) {
-      //
+      alert("스터디 생성에 실패했습니다.");
     }
   };
 
