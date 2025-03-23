@@ -1,5 +1,5 @@
 import { RootState } from "app/store";
-import { axiosInstance } from "data/axiosInstance";
+import axios from "axios";
 import { resetUser, setUser } from "features/member/memberSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,15 +11,18 @@ const useReconnect = () => {
   useEffect(() => {
     const fetchMe = async () => {
       try {
-        const res = await axiosInstance.get("members/me");
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/members/me`,
+        );
         dispatch(setUser(res.data));
       } catch (err1: any) {
         if (memberId) {
-          await axiosInstance
-            .post("auth/reissue")
+          await axios
+            .post(`${import.meta.env.VITE_API_URL}/auth/reissue`)
             .then(async () => {
-              console.log("here?");
-              const res = await axiosInstance.get("members/me");
+              const res = await axios.get(
+                `${import.meta.env.VITE_API_URL}/members/me`,
+              );
               dispatch(setUser(res.data));
             })
             .catch(() => {

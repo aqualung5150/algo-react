@@ -1,20 +1,23 @@
 import { RootState } from "app/store";
+import Modal from "components/Modal";
 import { axiosInstance } from "data/axiosInstance";
 import Applicant from "features/recruitpost/components/Applicant";
 import useAxios from "hooks/useAxios";
+import useFormInput from "hooks/useFormInput";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router";
 import { ApplicantSliceResponse, RecruitPostResponse } from "types/recruitpost";
 
-//TODO: 지원자 선택 후 스터디 생성
 const RecruitPost = () => {
   const navigate = useNavigate();
   const recruitPostId = useParams().id;
   const member = useSelector((state: RootState) => state.member);
   const [applicated, setApplicated] = useState("");
   const [error, setError] = useState<string>("");
+  const [modalOpen, setModalOpen] = useState(false);
   const [selectedApplicants, setSelectedApplicants] = useState<number[]>([]);
+  const { inputProps: studyName, setValue } = useFormInput();
 
   const {
     data: post,
@@ -57,7 +60,7 @@ const RecruitPost = () => {
   const createStudy = async () => {
     try {
       const requestBody: CreateStudyRequest = {
-        name: "name",
+        name: studyName.value,
         recruitPostId: recruitPostId ? parseInt(recruitPostId) : 0,
         memberIds: selectedApplicants,
       };
@@ -103,7 +106,7 @@ const RecruitPost = () => {
                   </button>
                 </Link>
                 <button
-                  onClick={async () => await createStudy()}
+                  onClick={() => setModalOpen(!modalOpen)}
                   className="h-10 w-24 cursor-pointer rounded-xs bg-blue-500 text-white"
                 >
                   스터디생성
@@ -126,6 +129,31 @@ const RecruitPost = () => {
           )}
         </div>
       )}
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <div className="flex h-full w-full flex-col items-center justify-center gap-14">
+          <h1 className="">스터디 생성</h1>
+          <input
+            type="text"
+            className="w-2/3 rounded-xs border px-2 py-1"
+            placeholder="스터디 이름을 입력해주세요."
+            {...studyName}
+          />
+          <div className="flex w-full items-center justify-center gap-14 text-xl">
+            <button
+              onClick={() => createStudy()}
+              className="button-green h-14 w-28"
+            >
+              확인
+            </button>
+            <button
+              onClick={() => setModalOpen(false)}
+              className="button-red h-14 w-28"
+            >
+              취소
+            </button>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

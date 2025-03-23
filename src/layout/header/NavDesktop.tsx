@@ -1,10 +1,12 @@
 import { RootState } from "app/store";
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router";
+import { createCookieSessionStorage, Link, useLocation } from "react-router";
+import Cookies from "js-cookie";
 
 const NavDesktop = () => {
   const member = useSelector((state: RootState) => state.member);
+  const pathname = useLocation().pathname;
 
   return (
     <div className="hidden w-full flex-row items-center bg-white lg:flex">
@@ -23,6 +25,9 @@ const NavDesktop = () => {
         </Link>
       ) : (
         <Link
+          onClick={() =>
+            Cookies.set("redirectUrl", pathname, { expires: 1, path: "/" })
+          }
           className="flex h-10 w-[100px] flex-col items-center justify-center rounded-xs border border-blue-500 text-base text-blue-500"
           to="login"
         >

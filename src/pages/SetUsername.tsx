@@ -23,7 +23,7 @@ const SetUsername = () => {
 
       dispatch(setUser(res.data.profile));
       setError("");
-      navigate(`/${res.data.redirectUrl}`);
+      navigate(res.data.redirectUrl);
     } catch (err: any) {
       setError("사용할 수 없는 username입니다.");
     }

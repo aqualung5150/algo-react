@@ -29,7 +29,7 @@ const Login = () => {
       const profileResponse = await axiosInstance.get("members/me");
       dispatch(setUser(profileResponse.data));
       setError("");
-      navigate(`/${loginResponse.data.redirectUrl}`);
+      navigate(loginResponse.data.redirectUrl);
     } catch (err: any) {
       setError("일치하는 계정이 없습니다.");
     }

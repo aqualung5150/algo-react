@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { setToggle } from "layout/menuSlice";
 import AngleUpIcon from "assets/angleUp.svg?react";
 import AngleDownIcon from "assets/angleDown.svg?react";
 import { logout } from "features/member/memberSlice";
+import Cookies from "js-cookie";
 
 const NavMobile = () => {
+  const pathname = useLocation().pathname;
   const dispatch = useDispatch();
   const member = useSelector((state: RootState) => state.member);
   const toggle = useSelector((state: RootState) => state.menu.toggle);
@@ -63,7 +65,17 @@ const NavMobile = () => {
             </>
           ) : (
             <li className="text-blue-500">
-              <Link to="login">로그인</Link>
+              <Link
+                onClick={() =>
+                  Cookies.set("redirectUrl", pathname, {
+                    expires: 1,
+                    path: "/",
+                  })
+                }
+                to="login"
+              >
+                로그인
+              </Link>
             </li>
           )}
         </ul>

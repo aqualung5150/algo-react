@@ -21,7 +21,6 @@ const useAxiosInterceptor = (instance: AxiosInstance) => {
     if (error.response.data.code === 1002) {
       //토큰 만료
       try {
-        console.log("HERE");
         await axios.post(`${import.meta.env.VITE_API_URL}/auth/reissue`);
 
         const res = await axios.get(
