@@ -65,7 +65,7 @@ const Study = () => {
             <h2>문제 풀이</h2>
             <StudySubmissionList submissions={submissionListData.submissions} />
             <button
-              onClick={() => navigate("/submissions/new")}
+              onClick={() => navigate(`submit`)}
               className="button-blue h-12 w-24 cursor-pointer font-normal"
             >
               제출하기

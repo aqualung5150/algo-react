@@ -1,15 +1,17 @@
 import PassSVG from "assets/pass-signup.svg?react";
+import { axiosInstance } from "data/axiosInstance";
 import TagSelector from "features/recruitpost/components/TagSelector";
 import useFormInput from "hooks/useFormInput";
 import useFormTextArea from "hooks/useFormTextArea";
 import { useState } from "react";
+import { Navigate, useNavigate, useParams } from "react-router";
 
-//TODO
 const SubmissionForm = () => {
+  const studyId = useParams().id;
+  const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const [isPrivate, setIsPrivate] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
-  console.log(tags);
   const { inputProps: subjectNumber, setValue: setSubjectNumber } =
     useFormInput();
   const { inputProps: content, setValue: setContent } = useFormTextArea();
@@ -17,12 +19,30 @@ const SubmissionForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (subjectNumber.value.length <= 0 || content.value.length <= 0) return;
+    if (
+      subjectNumber.value.length <= 0 ||
+      content.value.length <= 0 ||
+      tags.length < 1
+    )
+      return;
 
     try {
-      console.log("과제 제출 성공");
+      const requestBody: CreateSubmissionRequest = {
+        studyId: studyId ? parseInt(studyId) : 0,
+        visibility: isPrivate ? "PRIVATE" : "PUBLIC",
+        content: content.value,
+        subjectNumber: parseInt(subjectNumber.value),
+        tags: tags.map((tag) => parseInt(tag)),
+      };
+
+      const res = await axiosInstance.post("submissions", requestBody);
+
+      navigate(`/submissions/${res.data.id}`);
+
+      // console.log("과제 제출 성공");
     } catch (err: any) {
-      console.log("과제 제출 실패!");
+      alert(err.response.data.message);
+      // console.log("과제 제출 실패!");
     }
   };
 
@@ -31,6 +51,7 @@ const SubmissionForm = () => {
       className="flex h-full w-full flex-col items-center gap-5 p-5 lg:gap-10 xl:w-2/3"
       onSubmit={handleSubmit}
     >
+      <h1>문제 풀이 제출</h1>
       <div className="w-full rounded-xs border bg-white p-3 shadow">
         <input
           className="w-full p-1"
@@ -51,7 +72,7 @@ const SubmissionForm = () => {
         />
         <span className="text-sm">팀원에게만 공개</span>
       </div>
-      <div className="w-full flex-1 rounded-xs border bg-white p-3 shadow">
+      <div className="min-h-72 w-full flex-1 rounded-xs border bg-white p-3 shadow">
         <textarea
           className="h-full w-full resize-none p-1"
           placeholder="문제 풀이"
