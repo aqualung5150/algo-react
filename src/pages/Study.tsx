@@ -1,4 +1,5 @@
 import StudyMemberList from "features/study/components/StudyMemberList";
+import StudySubmissionList from "features/study/components/StudySubmissionList";
 import useAxios from "hooks/useAxios";
 import { useParams } from "react-router";
 
@@ -43,18 +44,7 @@ const Study = () => {
         </>
       )}
       {submissionListData && (
-        <>
-          <div>{submissionListData.hasNext}</div>
-          {submissionListData.submissions.map((submission) => (
-            <>
-              <span>{submission.submissionId}</span>
-              <span>{submission.profile.email}</span>
-              <span>{submission.subjectNumber}</span>
-              <span>{submission.weekNumber}</span>
-              <span>{submission.visibility}</span>
-            </>
-          ))}
-        </>
+        <StudySubmissionList submissions={submissionListData.submissions} />
       )}
     </div>
   );
