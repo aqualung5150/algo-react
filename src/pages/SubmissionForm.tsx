@@ -1,11 +1,15 @@
 import PassSVG from "assets/pass-signup.svg?react";
+import TagSelector from "features/recruitpost/components/TagSelector";
 import useFormInput from "hooks/useFormInput";
 import useFormTextArea from "hooks/useFormTextArea";
 import { useState } from "react";
 
+//TODO
 const SubmissionForm = () => {
   const [disabled, setDisabled] = useState(false);
   const [isPrivate, setIsPrivate] = useState(false);
+  const [tags, setTags] = useState<string[]>([]);
+  console.log(tags);
   const { inputProps: subjectNumber, setValue: setSubjectNumber } =
     useFormInput();
   const { inputProps: content, setValue: setContent } = useFormTextArea();
@@ -27,27 +31,30 @@ const SubmissionForm = () => {
       className="flex h-full w-full flex-col items-center gap-5 p-5 lg:gap-10 xl:w-2/3"
       onSubmit={handleSubmit}
     >
-      <div>TAG 선택</div>
-      <div
-        className={`flex w-full flex-row-reverse gap-1 select-none ${isPrivate ? "stroke-green-500" : "stroke-gray-400"}`}
-      >
-        <p>팀원에게만 공개</p>
-        <PassSVG
-          onClick={() => setIsPrivate(!isPrivate)}
-          className="h-6 w-6 cursor-pointer"
-        />
-      </div>
       <div className="w-full rounded-xs border bg-white p-3 shadow">
         <input
-          className="w-full p-2"
-          placeholder="모집글의 제목을 입력하세요."
+          className="w-full p-1"
+          placeholder="문제 번호"
           {...subjectNumber}
         />
       </div>
-      <div className="w-full rounded-xs border bg-white p-3 shadow">
+      <div className="flex flex-col gap-1">
+        <label htmlFor="tags">풀이 유형을 선택해주세요.</label>
+        <TagSelector id="tags" tags={tags} setTags={setTags} />
+      </div>
+      <div
+        onClick={() => setIsPrivate(!isPrivate)}
+        className="flex items-center gap-1 self-end"
+      >
+        <PassSVG
+          className={`h-4 w-4 ${isPrivate ? "stroke-green-500" : "stroke-gray-300"}`}
+        />
+        <span className="text-sm">팀원에게만 공개</span>
+      </div>
+      <div className="w-full flex-1 rounded-xs border bg-white p-3 shadow">
         <textarea
-          className="h-32 w-full p-2"
-          placeholder="모집글의 내용을 입력하세요."
+          className="h-full w-full resize-none p-1"
+          placeholder="문제 풀이"
           {...content}
         ></textarea>
       </div>
@@ -64,3 +71,5 @@ const SubmissionForm = () => {
     </form>
   );
 };
+
+export default SubmissionForm;

@@ -3,10 +3,11 @@ import StudyMemberList from "features/study/components/StudyMemberList";
 import StudySubmissionList from "features/study/components/StudySubmissionList";
 import useAxios from "hooks/useAxios";
 import { useState } from "react";
-import { useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 
 const Study = () => {
   const id = useParams().id;
+  const navigate = useNavigate();
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -57,11 +58,19 @@ const Study = () => {
             <p className="my-2 w-full border-b border-gray-300"></p>
             <h2>스터디 멤버</h2>
             <StudyMemberList members={studyData?.members} />
-            <p className="my-2 w-full border-b border-gray-300"></p>
           </>
         )}
         {submissionListData && (
-          <StudySubmissionList submissions={submissionListData.submissions} />
+          <>
+            <h2>문제 풀이</h2>
+            <StudySubmissionList submissions={submissionListData.submissions} />
+            <button
+              onClick={() => navigate("/submissions/new")}
+              className="button-blue h-12 w-24 cursor-pointer font-normal"
+            >
+              제출하기
+            </button>
+          </>
         )}
       </div>
       {studyData && modalOpen && (

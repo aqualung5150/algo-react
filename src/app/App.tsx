@@ -16,6 +16,7 @@ import RecruitPostForm from "pages/RecruitPostForm";
 import RecruitPostEdit from "pages/RecruitPostEdit";
 import useReconnect from "hooks/useReconnect";
 import Study from "pages/Study";
+import SubmissionForm from "pages/SubmissionForm";
 
 function App() {
   //TEST - cors 허용
@@ -43,6 +44,9 @@ function App() {
             <Route path=":id/edit" element={<RecruitPostEdit />} />
           </Route>
           <Route path="study/:id" element={<Study />} />
+          <Route path="submissions">
+            <Route path="new" element={<SubmissionForm />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

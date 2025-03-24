@@ -138,14 +138,14 @@ const RecruitPostForm = () => {
 
       <div className="w-full rounded-xs border bg-white p-3 shadow">
         <input
-          className="w-full p-2"
+          className="w-full p-1"
           placeholder="모집글의 제목을 입력하세요."
           {...title}
         />
       </div>
       <div className="w-full flex-1 rounded-xs border bg-white p-3 shadow">
         <textarea
-          className="h-full w-full resize-none p-2"
+          className="h-full w-full resize-none p-1"
           placeholder="모집글의 내용을 입력하세요."
           {...content}
         ></textarea>
