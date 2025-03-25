@@ -19,13 +19,10 @@ const SubmissionItem = ({
           </span>
           <span>{submission.profile.username}</span>
         </div>
-        <span className="text-sm">{submission.state}</span>
+        <span className="text-xs">{submission.state}</span>
       </div>
       <button
-        onClick={(e) => {
-          e.stopPropagation();
-          navigate(`/submissions/${submission.id}/evaluations`);
-        }}
+        onClick={() => navigate(`/submissions/${submission.id}/evaluations`)}
         className="h-14 w-24 cursor-pointer rounded-xs border font-normal"
       >
         평가
