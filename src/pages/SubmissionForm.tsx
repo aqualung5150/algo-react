@@ -38,11 +38,8 @@ const SubmissionForm = () => {
       const res = await axiosInstance.post("submissions", requestBody);
 
       navigate(`/submissions/${res.data.id}`);
-
-      // console.log("과제 제출 성공");
     } catch (err: any) {
       alert(err.response.data.message);
-      // console.log("과제 제출 실패!");
     }
   };
 
