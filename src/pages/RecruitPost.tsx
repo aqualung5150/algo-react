@@ -4,7 +4,7 @@ import { axiosInstance } from "data/axiosInstance";
 import Applicant from "features/recruitpost/components/Applicant";
 import useAxios from "hooks/useAxios";
 import useFormInput from "hooks/useFormInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router";
 import { ApplicantSliceResponse, RecruitPostResponse } from "types/recruitpost";
@@ -32,6 +32,12 @@ const RecruitPost = () => {
     `/recruit-posts/${recruitPostId}/applicants`,
   );
 
+  useEffect(() => {
+    if (member.id) {
+      setSelectedApplicants([...selectedApplicants, member.id]);
+    }
+  }, [member]);
+
   const applicate = async () => {
     try {
       await axiosInstance.post(`recruit-posts/${recruitPostId}/applicants`);
@@ -58,6 +64,7 @@ const RecruitPost = () => {
   };
 
   const createStudy = async () => {
+    console.log(selectedApplicants);
     try {
       const requestBody: CreateStudyRequest = {
         name: studyName.value,

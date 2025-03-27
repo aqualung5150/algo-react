@@ -81,9 +81,9 @@ const RecruitPostForm = () => {
           </select>
         </div>
         <div className="flex flex-col gap-1">
-          <label htmlFor="submitDayOfWeek">스터디 인원을 선택해주세요.</label>
+          <label htmlFor="numberOfMembers">스터디 인원을 선택해주세요.</label>
           <select
-            name="numberOfMembers"
+            id="numberOfMembers"
             className="rounded-xs border px-2 py-1"
             onChange={(e) => setNumberOfMembers(e.target.value)}
             value={numberOfMembers}
@@ -118,7 +118,7 @@ const RecruitPostForm = () => {
         <div className="flex flex-col gap-1">
           <label htmlFor="level">문제의 난이도를 선택해주세요.</label>
           <select
-            name="level"
+            id="level"
             className="rounded-xs border px-2 py-1"
             onChange={(e) => setLevel(e.target.value)}
             value={level}

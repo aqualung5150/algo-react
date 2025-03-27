@@ -18,6 +18,8 @@ import useReconnect from "hooks/useReconnect";
 import Study from "pages/Study";
 import SubmissionForm from "pages/SubmissionForm";
 import Submission from "pages/Submission";
+import EvaluationForm from "pages/EvaluationForm";
+import Evaluations from "pages/Evaluations";
 
 function App() {
   //TEST - cors 허용
@@ -50,6 +52,7 @@ function App() {
           </Route>
           <Route path="submissions">
             <Route path=":id" element={<Submission />} />
+            <Route path=":id/evaluations" element={<Evaluations />} />
           </Route>
         </Route>
       </Routes>
