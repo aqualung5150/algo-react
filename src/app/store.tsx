@@ -4,6 +4,7 @@ import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 import menuSlice from "../layout/menuSlice";
 import memberSlice from "features/member/memberSlice";
+import authSlice from "features/auth/authSlice";
 
 // redux-persist
 
@@ -19,6 +20,7 @@ const rootReducer = persistReducer(
   combineReducers({
     member: memberSlice.reducer,
     menu: menuSlice.reducer,
+    auth: authSlice.reducer,
   }),
 );
 

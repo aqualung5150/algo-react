@@ -44,7 +44,7 @@ const Study = () => {
   return (
     <>
       <div className="flex h-full w-full flex-col items-center gap-5 p-5 2xl:w-2/3">
-        {studyData && (
+        {studyData && submissionListData && (
           <>
             <div className="flex w-full items-center">
               <h1 className="flex-1 text-center">{studyData.name}</h1>
@@ -58,10 +58,6 @@ const Study = () => {
             <p className="my-2 w-full border-b border-gray-300"></p>
             <h2>스터디 멤버</h2>
             <StudyMemberList members={studyData?.members} />
-          </>
-        )}
-        {submissionListData && (
-          <>
             <h2>문제 풀이</h2>
             <StudySubmissionList submissions={submissionListData.submissions} />
             <button

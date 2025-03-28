@@ -5,7 +5,8 @@ import axios, {
 } from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { logout, resetUser, setUser } from "features/member/memberSlice";
+import { logout, setUser } from "features/member/memberSlice";
+import Cookies from "js-cookie";
 
 const useAxiosInterceptor = (instance: AxiosInstance) => {
   const dispatch = useDispatch();

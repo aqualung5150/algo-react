@@ -18,8 +18,8 @@ import useReconnect from "hooks/useReconnect";
 import Study from "pages/Study";
 import SubmissionForm from "pages/SubmissionForm";
 import Submission from "pages/Submission";
-import EvaluationForm from "pages/EvaluationForm";
 import Evaluations from "pages/Evaluations";
+import PrivateRoute from "components/PrivateRoute";
 
 function App() {
   //TEST - cors 허용
@@ -36,23 +36,31 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="members/:id" element={<Members />}>
             <Route path="" element={<Profile />} />
-            <Route path="edit" element={<EditProfile />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="edit" element={<EditProfile />} />
+            </Route>
           </Route>
           <Route path="set-username" element={<SetUsername />} />
           <Route path="signup" element={<Signup />} />
           <Route path="recruit-posts">
             <Route path="" element={<RecruitPostBoard />} />
             <Route path=":id" element={<RecruitPost />} />
-            <Route path="new" element={<RecruitPostForm />} />
-            <Route path=":id/edit" element={<RecruitPostEdit />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="new" element={<RecruitPostForm />} />
+              <Route path=":id/edit" element={<RecruitPostEdit />} />
+            </Route>
           </Route>
           <Route path="study">
             <Route path=":id" element={<Study />} />
-            <Route path=":id/submit" element={<SubmissionForm />} />
+            <Route element={<PrivateRoute />}>
+              <Route path=":id/submit" element={<SubmissionForm />} />
+            </Route>
           </Route>
           <Route path="submissions">
             <Route path=":id" element={<Submission />} />
-            <Route path=":id/evaluations" element={<Evaluations />} />
+            <Route element={<PrivateRoute />}>
+              <Route path=":id/evaluations" element={<Evaluations />} />
+            </Route>
           </Route>
         </Route>
       </Routes>

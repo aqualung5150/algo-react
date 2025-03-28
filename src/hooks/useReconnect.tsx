@@ -1,5 +1,6 @@
 import { RootState } from "app/store";
 import axios from "axios";
+import { finishConnection } from "features/auth/authSlice";
 import { resetUser, setUser } from "features/member/memberSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,6 +32,8 @@ const useReconnect = () => {
         } else {
           dispatch(resetUser());
         }
+      } finally {
+        dispatch(finishConnection());
       }
     };
 

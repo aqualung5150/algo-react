@@ -29,7 +29,7 @@ const NavMobile = () => {
       <div>
         <ul className="flex flex-col gap-2">
           <li onClick={() => dispatch(setToggle(false))}>
-            <Link to={"recruit-posts"}>스터디</Link>
+            <Link to={"recruit-posts"}>스터디모집</Link>
           </li>
           {member.id ? (
             <>
