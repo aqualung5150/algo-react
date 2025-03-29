@@ -19,3 +19,14 @@ interface StudyResponse {
   id: number;
   studyRule: StudyRuleResponse;
 }
+
+interface StudyPageResponse {
+  totalCount: number;
+  studyProfiles: StudyProfile[];
+}
+
+interface StudyProfile {
+  id: number;
+  name: string;
+  state: string;
+}

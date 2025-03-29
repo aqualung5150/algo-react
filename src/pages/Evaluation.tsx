@@ -1,5 +1,7 @@
 import { useState } from "react";
 import EvaluationEdit from "./EvaluationEdit";
+import { useSelector } from "react-redux";
+import { RootState } from "app/store";
 
 const Evaluation = ({
   id,
@@ -7,6 +9,7 @@ const Evaluation = ({
   passFail,
   evaluator,
 }: EvaluationResponse) => {
+  const member = useSelector((state: RootState) => state.member);
   const [updateForm, setUpdateForm] = useState(false);
 
   return (
@@ -18,12 +21,14 @@ const Evaluation = ({
             <span>{passFail}</span>
           </div>
           <p className="flex-1 p-3">{content}</p>
-          <button
-            onClick={() => setUpdateForm(true)}
-            className="button-blue h-6 w-12 self-end"
-          >
-            수정
-          </button>
+          {member.id == evaluator.id && (
+            <button
+              onClick={() => setUpdateForm(true)}
+              className="button-blue h-6 w-12 self-end"
+            >
+              수정
+            </button>
+          )}
         </>
       ) : (
         <>

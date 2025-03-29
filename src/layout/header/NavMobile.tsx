@@ -31,6 +31,10 @@ const NavMobile = () => {
           <li onClick={() => dispatch(setToggle(false))}>
             <Link to={"recruit-posts"}>스터디모집</Link>
           </li>
+          <li onClick={() => dispatch(setToggle(false))}>
+            <Link to={"my-study"}>나의스터디</Link>
+          </li>
+
           {member.id ? (
             <>
               <li

@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import Evaluation from "./Evaluation";
 import EvaluationForm from "./EvaluationForm";
 
-//TODO
 const Evaluations = () => {
   const submissionId = useParams().id;
   const { data, error, loading } = useAxios<EvaluationsResponse>(

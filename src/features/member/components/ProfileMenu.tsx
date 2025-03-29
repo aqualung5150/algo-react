@@ -15,6 +15,9 @@ const ProfileMenu = () => {
         <li>
           <Link to="edit">정보 수정</Link>
         </li>
+        <li>
+          <Link to="studies">나의 스터디</Link>
+        </li>
         <li
           className="cursor-pointer text-sm text-gray-500"
           onClick={() => dispatch(logout(import.meta.env.VITE_BASE_URL))}

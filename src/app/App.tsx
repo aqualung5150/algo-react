@@ -20,6 +20,7 @@ import SubmissionForm from "pages/SubmissionForm";
 import Submission from "pages/Submission";
 import Evaluations from "pages/Evaluations";
 import PrivateRoute from "components/PrivateRoute";
+import StudyBoard from "pages/StudyBoard";
 
 function App() {
   //TEST - cors 허용
@@ -38,6 +39,7 @@ function App() {
             <Route path="" element={<Profile />} />
             <Route element={<PrivateRoute />}>
               <Route path="edit" element={<EditProfile />} />
+              <Route path="studies" element={<StudyBoard />} />
             </Route>
           </Route>
           <Route path="set-username" element={<SetUsername />} />

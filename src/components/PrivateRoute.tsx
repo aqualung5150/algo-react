@@ -11,7 +11,6 @@ const PrivateRoute = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(loading, memberId);
     if (loading === true) return;
     if (memberId) return;
 
