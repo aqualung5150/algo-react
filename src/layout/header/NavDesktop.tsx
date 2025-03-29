@@ -14,9 +14,6 @@ const NavDesktop = () => {
         <li className="cursor-pointer hover:text-blue-500">
           <Link to="recruit-posts">스터디모집</Link>
         </li>
-        <li className="cursor-pointer hover:text-blue-500">
-          <Link to="my-study">나의스터디</Link>
-        </li>
       </ul>
       {member.id ? (
         <Link

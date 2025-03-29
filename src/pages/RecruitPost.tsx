@@ -8,8 +8,19 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router";
 import { ApplicantSliceResponse, RecruitPostResponse } from "types/recruitpost";
+import MarkdownViewer from "components/MarkdownViewer";
 
 const RecruitPost = () => {
+  const markdown = `
+# Hello, Markdown!
+This is a **bold** text and this is an *italic* text.
+* List item 1
+* List item 2
+1. hello
+2. no
+\`\`\`코드블록\`\`\`
+`;
+
   const navigate = useNavigate();
   const recruitPostId = useParams().id;
   const member = useSelector((state: RootState) => state.member);
@@ -86,7 +97,7 @@ const RecruitPost = () => {
           <div className="w-full border-b"></div>
           <div className="w-full">주 {post.studyRule.submitPerWeek}회</div>
           <div className="w-full border-b"></div>
-          <p className="w-full break-words">{post.content}</p>
+          <MarkdownViewer markdown={post.content} />
           <div className="w-full border-b"></div>
 
           {member.id === post.author.id ? (

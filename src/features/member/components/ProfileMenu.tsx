@@ -11,7 +11,7 @@ const ProfileMenu = () => {
         <Link to="">마이페이지</Link>
       </h1>
       <h2 className="py-2 font-bold">내 정보</h2>
-      <ul>
+      <ul className="flex flex-col gap-1">
         <li>
           <Link to="edit">정보 수정</Link>
         </li>

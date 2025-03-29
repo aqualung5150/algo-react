@@ -1,4 +1,5 @@
 import { RootState } from "app/store";
+import MarkdownViewer from "components/MarkdownViewer";
 import useAxios from "hooks/useAxios";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -44,7 +45,8 @@ const Submission = () => {
               })}
             </ul>
           </div>
-          <p className="h-full w-full break-words">{data.content}</p>
+          {/* <p className="h-full w-full break-words">{data.content}</p> */}
+          <MarkdownViewer markdown={data.content} />
         </>
       )}
     </div>

@@ -1,9 +1,11 @@
 import PassSVG from "assets/pass-signup.svg?react";
+import MarkdownViewer from "components/MarkdownViewer";
 import { axiosInstance } from "data/axiosInstance";
 import TagSelector from "features/recruitpost/components/TagSelector";
 import useFormInput from "hooks/useFormInput";
 import useFormTextArea from "hooks/useFormTextArea";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useDropzone } from "react-dropzone";
 import { Navigate, useNavigate, useParams } from "react-router";
 
 const SubmissionForm = () => {
@@ -43,6 +45,28 @@ const SubmissionForm = () => {
     }
   };
 
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    try {
+      const formData = new FormData();
+
+      acceptedFiles.forEach((e) => formData.append("image", e));
+      const res = await axiosInstance.postForm(
+        `${import.meta.env.VITE_API_URL}/images`,
+        formData,
+      );
+
+      const images = res.data.images as string[];
+      for (const image of images) {
+        const appendString = `\n![](${image})`;
+        setContent((prevContent) => prevContent.concat(appendString));
+      }
+    } catch (err: any) {
+      alert(err);
+    }
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
   return (
     <form
       className="flex h-full w-full flex-col items-center gap-5 p-5 lg:gap-10 xl:w-2/3"
@@ -69,12 +93,16 @@ const SubmissionForm = () => {
         />
         <span className="text-sm">팀원에게만 공개</span>
       </div>
-      <div className="min-h-72 w-full flex-1 rounded-xs border bg-white p-3 shadow">
+      <div className="flex min-h-96 w-full flex-1 flex-col rounded-xs border bg-white p-3 shadow lg:flex-row">
         <textarea
-          className="h-full w-full resize-none p-1"
-          placeholder="문제 풀이"
+          {...getRootProps()}
+          className="h-full w-full resize-none p-2 outline-none"
+          placeholder="모집글의 내용을 입력하세요."
           {...content}
-        ></textarea>
+        />
+        <div className="h-full w-full border-t p-2 break-words lg:border-t-0 lg:border-l">
+          <MarkdownViewer markdown={content.value} />
+        </div>
       </div>
       <button
         className={`flex h-14 w-[120px] items-center justify-center gap-1 ${disabled ? "button-white" : "button-blue"}`}

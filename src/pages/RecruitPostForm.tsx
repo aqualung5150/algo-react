@@ -1,8 +1,10 @@
+import MarkdownViewer from "components/MarkdownViewer";
 import { axiosInstance } from "data/axiosInstance";
 import TagSelector from "features/recruitpost/components/TagSelector";
 import useFormInput from "hooks/useFormInput";
 import useFormTextArea from "hooks/useFormTextArea";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useDropzone } from "react-dropzone";
 import { useNavigate } from "react-router";
 import isEmptyOrSpaces from "utils/isStringEmpty";
 
@@ -52,6 +54,28 @@ const RecruitPostForm = () => {
       alert("게시글 작성에 실패했습니다.");
     }
   };
+
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    try {
+      const formData = new FormData();
+
+      acceptedFiles.forEach((e) => formData.append("image", e));
+      const res = await axiosInstance.postForm(
+        `${import.meta.env.VITE_API_URL}/images`,
+        formData,
+      );
+
+      const images = res.data.images as string[];
+      for (const image of images) {
+        const appendString = `\n![](${image})`;
+        setContent((prevContent) => prevContent.concat(appendString));
+      }
+    } catch (err: any) {
+      alert(err);
+    }
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <form
@@ -143,12 +167,23 @@ const RecruitPostForm = () => {
           {...title}
         />
       </div>
-      <div className="w-full flex-1 rounded-xs border bg-white p-3 shadow">
+      {/* <div className="w-full flex-1 rounded-xs border bg-white p-3 shadow">
         <textarea
           className="h-full w-full resize-none p-1"
           placeholder="모집글의 내용을 입력하세요."
           {...content}
         ></textarea>
+      </div> */}
+      <div className="flex min-h-96 w-full flex-1 flex-col rounded-xs border bg-white p-3 shadow lg:flex-row">
+        <textarea
+          {...getRootProps()}
+          className="h-full w-full min-w-1/2 resize-none p-2 outline-none"
+          placeholder="모집글의 내용을 입력하세요."
+          {...content}
+        />
+        <div className="h-full w-full min-w-1/2 border-t p-2 break-words lg:border-t-0 lg:border-l">
+          <MarkdownViewer markdown={content.value} />
+        </div>
       </div>
       <button
         className={`flex h-14 w-[120px] items-center justify-center gap-1 ${disabled ? "button-white" : "button-blue"}`}
