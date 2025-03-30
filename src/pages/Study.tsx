@@ -93,7 +93,7 @@ const Study = () => {
               <ul className="flex w-2/4 flex-col font-normal">
                 {tagProps.map(([name, id]) => {
                   if (studyData.studyRule.tags.includes(id)) {
-                    return <li>{`* ${name}`}</li>;
+                    return <li key={id}>{`* ${name}`}</li>;
                   } else return null;
                 })}
               </ul>

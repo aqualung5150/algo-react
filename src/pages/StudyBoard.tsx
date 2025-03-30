@@ -11,7 +11,7 @@ const StudyBoard = () => {
   );
 
   return (
-    <ul className="flex w-full flex-col items-center gap-10 p-10">
+    <ul className="flex w-full flex-col items-center gap-3 p-10">
       {data &&
         data.studyProfiles.map((e) => (
           <li
