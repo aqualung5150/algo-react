@@ -85,7 +85,7 @@ This is a **bold** text and this is an *italic* text.
       const res = await axiosInstance.post(`study`, requestBody);
       navigate(`/study/${res.data.id}`);
     } catch (err: any) {
-      alert("스터디 생성에 실패했습니다.");
+      alert(err.response.data.message);
     }
   };
 

@@ -21,6 +21,7 @@ import Submission from "pages/Submission";
 import Evaluations from "pages/Evaluations";
 import PrivateRoute from "components/PrivateRoute";
 import StudyBoard from "pages/StudyBoard";
+import SubmissionEdit from "pages/SubmissionEdit";
 
 function App() {
   //TEST - cors 허용
@@ -62,6 +63,7 @@ function App() {
             <Route path=":id" element={<Submission />} />
             <Route element={<PrivateRoute />}>
               <Route path=":id/evaluations" element={<Evaluations />} />
+              <Route path=":id/edit" element={<SubmissionEdit />} />
             </Route>
           </Route>
         </Route>

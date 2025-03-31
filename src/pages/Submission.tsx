@@ -2,11 +2,12 @@ import { RootState } from "app/store";
 import MarkdownViewer from "components/MarkdownViewer";
 import useAxios from "hooks/useAxios";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
-//TODO
+//TODO: 수정하기
 const Submission = () => {
   const id = useParams().id;
+  const navigate = useNavigate();
   const memberId = useSelector((state: RootState) => state.member.id);
   const { data, error, loading } = useAxios<SubmissionResponse>(
     `submissions/${id}`,
@@ -29,7 +30,12 @@ const Submission = () => {
             <div className="flex w-full justify-between">
               <span className="font-semibold">{data.profile.username}</span>
               {memberId && memberId === data.profile.id && (
-                <span className="text-gray-500">수정하기</span>
+                <span
+                  onClick={() => navigate("edit")}
+                  className="text-gray-500"
+                >
+                  수정하기
+                </span>
               )}
             </div>
             <ul className="flex w-full gap-3">
