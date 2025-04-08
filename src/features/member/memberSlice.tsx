@@ -28,10 +28,13 @@ const memberSlice = createSlice({
     },
 
     logout: (state, action) => {
-      axiosInstance.post("/logout").catch(() => {});
-
-      window.location.href = action.payload;
-      return initialState;
+      axiosInstance
+        .post("/logout")
+        .catch(() => {})
+        .finally(() => {
+          window.location.href = action.payload;
+          return initialState;
+        });
     },
   },
 });

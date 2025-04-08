@@ -74,6 +74,7 @@ const NavMobile = () => {
               <Link
                 onClick={() =>
                   Cookies.set("redirectUrl", pathname, {
+                    domain: ".rockaria.store",
                     expires: 1,
                     path: "/",
                   })

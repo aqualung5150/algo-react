@@ -25,7 +25,11 @@ const NavDesktop = () => {
       ) : (
         <Link
           onClick={() =>
-            Cookies.set("redirectUrl", pathname, { expires: 1, path: "/" })
+            Cookies.set("redirectUrl", pathname, {
+              domain: ".rockaria.store",
+              expires: 1,
+              path: "/",
+            })
           }
           className="flex h-10 w-[100px] flex-col items-center justify-center rounded-xs border border-blue-500 text-base text-blue-500"
           to="login"
